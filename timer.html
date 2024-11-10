@@ -2,32 +2,26 @@
 <html>
 <head>
     <style>
+                @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+
+        
         body {
+
             margin: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: 'Arial', sans-serif;
+            font-family: "Indie Flower", cursive;
+
             background: #FFFFFF;
             color: #833471;
             text-align: center;
             padding: 20px;
         }
 
-        .decorative-border {
-            width: 100%;
-            max-width: 800px;
-            height: 60px;
-            background-repeat: repeat-x;
-            background-size: contain;
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-        }
+       
 
         .title {
             font-size: 3em;
@@ -92,12 +86,7 @@
             animation: pulse 2s infinite;
         }
 
-        .decorative-element {
-            font-size: 2em;
-            margin: 0 10px;
-            animation: bounce 1s infinite;
-        }
-
+        
         @keyframes shine {
             0% { transform: rotate(45deg) translateY(-100%); }
             100% { transform: rotate(45deg) translateY(100%); }
@@ -129,32 +118,89 @@
                 font-size: 2em;
             }
         }
+
+
+        .decorative-border {
+            width: 100%;
+            max-width: 800px;
+            height: 80px;
+            background-repeat: repeat-x;
+            background-size: contain;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            position: relative;
+        }
+
+        .orbit-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .center-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            z-index: 2;
+        }
+
+        .decorative-element {
+            position: absolute;
+            font-size: 1.22em;
+            animation: orbit 8s linear infinite;
+            transform-origin: 50% 50%;
+            filter: drop-shadow(0 0 0.75rem rgb(247, 177, 191));
+        }
+
+        .decorative-element:nth-child(1) { animation-delay: 0s; }
+        .decorative-element:nth-child(2) { animation-delay: -2s; }
+        .decorative-element:nth-child(3) { animation-delay: -4s; }
+        .decorative-element:nth-child(4) { animation-delay: -6s; }
+
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg) translateX(40px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translateX(40px) rotate(-360deg);
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="decorative-border">
-        <span class="decorative-element">🌺</span>
-        <span class="decorative-element">🪔</span>
-        <span class="decorative-element">🌺</span>
+        <div class="orbit-container">
+            <span class="center-element"></span>
+            <span class="decorative-element">🌺</span>
+            <span class="decorative-element">🪔</span>
+            <span class="decorative-element">❤️</span>
+            <span class="decorative-element">✨</span>
+        </div>
     </div>
 
     <h1 class="title">Shaadi Ka Countdown</h1>
 
-    <div class="countdown-container" id="countdown">
+    <div class="countdown-container" id="countdown" >
         <div class="countdown-box">
-            <div class="number" id="days">00</div>
+            <div class="number" id="days"  style="font-family: 'Courier New', Courier, monospace;">00</div>
             <div class="label">Days</div>
         </div>
         <div class="countdown-box">
-            <div class="number" id="hours">00</div>
+            <div class="number" id="hours" style="font-family: 'Courier New', Courier, monospace;">00</div>
             <div class="label">Hours</div>
         </div>
         <div class="countdown-box">
-            <div class="number" id="minutes">00</div>
+            <div class="number" id="minutes" style="font-family: 'Courier New', Courier, monospace;">00</div>
             <div class="label">Minutes</div>
         </div>
         <div class="countdown-box">
-            <div class="number" id="seconds">00</div>
+            <div class="number" id="seconds" style="font-family: 'Courier New', Courier, monospace;">00</div>
             <div class="label">Seconds</div>
         </div>
     </div>
@@ -167,6 +213,8 @@
         <span class="decorative-element">💫</span>
         <span class="decorative-element">❤️</span>
         <span class="decorative-element">💫</span>
+        <span class="decorative-element">❤️</span>
+
     </div>
 
     <script>
