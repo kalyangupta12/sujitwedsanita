@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+            background: #FFFFFF;
+            color: #833471;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .decorative-border {
+            width: 100%;
+            max-width: 800px;
+            height: 60px;
+            background-repeat: repeat-x;
+            background-size: contain;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+        }
+
+        .title {
+            font-size: 3em;
+            margin: 20px 0;
+            color: #c23616;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .countdown-box {
+            background: linear-gradient(45deg, #c23616, #e84118);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .label {
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin: 30px 0;
+            color: #c23616;
+            animation: pulse 2s infinite;
+        }
+
+        .decorative-element {
+            font-size: 2em;
+            margin: 0 10px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateY(-100%); }
+            100% { transform: rotate(45deg) translateY(100%); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(194,54,22,0.1); }
+            50% { text-shadow: 2px 2px 15px rgba(194,54,22,0.3); }
+        }
+
+        @media (max-width: 600px) {
+            .countdown-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .title {
+                font-size: 2em;
+            }
+            .number {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-border">
+        <span class="decorative-element">🌺</span>
+        <span class="decorative-element">🪔</span>
+        <span class="decorative-element">🌺</span>
+    </div>
+
+    <h1 class="title">Shaadi Ka Countdown</h1>
+
+    <div class="countdown-container" id="countdown">
+        <div class="countdown-box">
+            <div class="number" id="days">00</div>
+            <div class="label">Days</div>
+        </div>
+        <div class="countdown-box">
+            <div class="number" id="hours">00</div>
+            <div class="label">Hours</div>
+        </div>
+        <div class="countdown-box">
+            <div class="number" id="minutes">00</div>
+            <div class="label">Minutes</div>
+        </div>
+        <div class="countdown-box">
+            <div class="number" id="seconds">00</div>
+            <div class="label">Seconds</div>
+        </div>
+    </div>
+
+    <div class="message" id="message">
+        Din Shagna Da Chadheya... 🎵
+    </div>
+
+    <div class="decorative-border">
+        <span class="decorative-element">💫</span>
+        <span class="decorative-element">❤️</span>
+        <span class="decorative-element">💫</span>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const weddingDate = new Date("Nov 22, 2024 18:00:00").getTime();
+            
+            function update() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                if (distance < 0) {
+                    document.getElementById('message').innerHTML = 
+                        "Congratulations to the Happy Couple! ❤️";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerHTML = String(days).padStart(2, '0');
+                document.getElementById('hours').innerHTML = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerHTML = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerHTML = String(seconds).padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCountdown);
+    </script>
+</body>
+</html>
